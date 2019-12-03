@@ -4,6 +4,7 @@
 <head>
   
   {% block title %}<title>Домашняя библиотека</title>{% endblock %}
+  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -17,7 +18,7 @@
 
 <body>
 
-  <div class="container-fluid">
+  <div class="container">
     <div class="bg-secondary row">
       <div class="header-logo">
         <img src="{% static "images/logo.jpg" %}" alt="Library logo" height="80" width="80">
@@ -25,13 +26,19 @@
       <div class="header-text">
         <h1>Моя домашняя библиотека</h1>
       </div>
-      <div class="adminka">
-        <a href="/admin/">Войти</a>
+      <div class="text-right adminka">
+        {% block log-reg %}
+        {% if username %}
+          <h6>Привет, {{ username }}!</h6> <a class="btn btn-success" href="/logout">Выйти</a>
+        {% else %}
+          <a class="btn btn-success" href="/login">Войти</a><a class="btn btn-success" href="/accounts/signup/">Зарегистрироваться</a>
+        {% endif %}
+        {% endblock %}
       </div>
     </div>
 
     <div class="row main-wrapper">
-      <div class="col-sm-2">
+      <div class="sidebar1 col-sm-2">
         {% block sidebar %}
         <div class="list-group">
           <a class="list-group-item list-group-item-action" href="/">Home</a>
@@ -42,7 +49,7 @@
         </div>
        {% endblock %}
       </div>
-      <div class="col-sm-10 ">
+      <div class="content1 col-sm-10 ">
       {% block content %}
         <p>Добро пожаловать.</p>
       {% endblock %}

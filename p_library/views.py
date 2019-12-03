@@ -1,12 +1,13 @@
+from django.views.generic import FormView
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
+from django.contrib.auth.forms import AuthenticationForm,  UserCreationForm
+from django.contrib import auth
+from django.contrib.auth import login, authenticate
+from django.http.response import HttpResponseRedirect
+from django.urls import reverse_lazy
 from django.template import loader
 from .models import Book, Author, Redaction, BooksRent
-
-
-def books_list(request):
-    books = Book.objects.all()
-    return HttpResponse(books)
 
 def index(request):
     template = loader.get_template('index.html')
@@ -15,6 +16,8 @@ def index(request):
         "title": "мою библиотеку",
         "books": books,
     }
+    if request.user.is_authenticated:
+        biblio_data['username'] = request.user.username
     return HttpResponse(template.render(biblio_data, request))
 
 def book_increment(request):
@@ -61,16 +64,20 @@ def redactions(request):
         "books": books,
         "redactions": redactions,
     }
+    if request.user.is_authenticated:
+        redact_data['username'] = request.user.username
     return HttpResponse(template.render(redact_data, request))
 
 def books(request):
     template = loader.get_template('books.html')
     books = Book.objects.all()
-    biblio_data = {
-        "title": "мою библиотеку",
+    books_data = {
+        "title": "Книги",
         "books": books,
     }
-    return HttpResponse(template.render(biblio_data, request))
+    if request.user.is_authenticated:
+        books_data['username'] = request.user.username
+    return HttpResponse(template.render(books_data, request))
 
 def authors(request):
     template = loader.get_template('authors.html')
@@ -81,6 +88,8 @@ def authors(request):
         "books": books,
         "authors": authors,
     }
+    if request.user.is_authenticated:
+        authors_data['username'] = request.user.username
     return HttpResponse(template.render(authors_data, request))
 
 def books_rent(request):
@@ -89,4 +98,8 @@ def books_rent(request):
     rental_data = {
         "rented_books": rented_books,
     }
+    if request.user.is_authenticated:
+        rental_data['username'] = request.user.username
     return HttpResponse(template.render(rental_data, request))
+
+

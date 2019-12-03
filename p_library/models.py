@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 from datetime import date
 
 class Author(models.Model):  
@@ -34,11 +34,6 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
-class Friend(models.Model):
-    fr_name = models.CharField(max_length=60, help_text="Введи ФИО друга", verbose_name="ФИО")
-    fr_mail = models.EmailField(help_text="Введи EMAIL друга", verbose_name="Электронная почта")
-    def __str__(self):
-        return self.fr_name
 
 class BooksRent(models.Model):
     rented_book = models.OneToOneField(
@@ -48,7 +43,7 @@ class BooksRent(models.Model):
         help_text="Помните, что книги нельзя сздать в аренду дважды"
         )
     book_renter = models.OneToOneField(
-        Friend, 
+        User, 
         verbose_name="Арендатор", 
         on_delete=models.PROTECT, 
         blank=True,

@@ -14,21 +14,27 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, reverse_lazy
 from p_library import views
-from django.conf.urls.static import static
 from django.conf import settings
+from django.conf.urls import url
+from django.conf.urls.static import static
+from allauth.account.views import login, logout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
-    path('index/', views.index),
+    path('index/', views.index,  name='index'),
     path('index/book_increment/', views.book_increment),
     path('index/book_decrement/', views.book_decrement),
     path('redactions/', views.redactions),
     path('books/', views.books),
     path('authors/', views.authors),
     path('renters/', views.books_rent),
+    path('login/', login, name='login'),  
+    path('logout/', logout, name='logout'),
+    url(r'^accounts/', include('allauth.urls')),  
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

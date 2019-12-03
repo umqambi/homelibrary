@@ -1,5 +1,5 @@
 body {
-    background-color: aquamarine;
+    background-color: rgb(197, 253, 234);
 }
 
 .header-logo {
@@ -24,4 +24,13 @@ body {
 
 .main-wrapper {
     margin-top: 20px;
+}
+
+.sidebar1 {
+    padding-left: 0px;
+    padding-right: 20px;
+}
+
+.content1 {
+    padding-left: 30px;
 }

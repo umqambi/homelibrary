@@ -1,5 +1,5 @@
 from django import forms  
-from p_library.models import Author  
+from p_library.models import Author
   
 class AuthorForm(forms.ModelForm):  
     class Meta:  

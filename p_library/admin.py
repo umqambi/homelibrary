@@ -1,5 +1,5 @@
 from django.contrib import admin
-from p_library.models import Book, Author, Redaction, Friend, BooksRent
+from p_library.models import Book, Author, Redaction, BooksRent
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
@@ -20,10 +20,6 @@ class AuthorAdmin(admin.ModelAdmin):
 class RedactionAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(Friend)
-class FriendAdmin(admin.ModelAdmin):
-    pass
-
 @admin.register(BooksRent)
 class BooksRentAdmin(admin.ModelAdmin):
-    list_display = ('rented_book', 'book_renter',)
+    list_display = ('book_renter', 'rented_book',)
