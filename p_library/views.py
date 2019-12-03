@@ -103,3 +103,13 @@ def books_rent(request):
     return HttpResponse(template.render(rental_data, request))
 
 
+def profile(request):
+    template = loader.get_template('profile.html')
+    if request.user.is_authenticated:
+        profile_data = {
+        "title": "Профиль",
+        "username": request.user.username,
+        }
+        return HttpResponse(template.render(profile_data, request))
+    else:
+        return HttpResponseRedirect(reverse_lazy('login'))

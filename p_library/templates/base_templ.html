@@ -31,7 +31,7 @@
         {% if username %}
           <h6>Привет, {{ username }}!</h6> <a class="btn btn-success" href="/logout">Выйти</a>
         {% else %}
-          <a class="btn btn-success" href="/login">Войти</a><a class="btn btn-success" href="/accounts/signup/">Зарегистрироваться</a>
+          <a class="btn btn-success" href="/accounts/github/login/?process=login">Войти с GitHab</a>
         {% endif %}
         {% endblock %}
       </div>
@@ -45,7 +45,10 @@
           <a class="list-group-item list-group-item-action" href="/books">Книги</a>
           <a class="list-group-item list-group-item-action" href="/authors">Авторы</a>
           <a class="list-group-item list-group-item-action" href="/redactions">Издательства</a>
-          <a class="list-group-item list-group-item-action" href="/renters/">Аренда книг</a> 
+          <a class="list-group-item list-group-item-action" href="/renters/">Аренда книг</a>
+          {% if username %}
+          <a class="list-group-item list-group-item-action" href="/profile/">Профиль</a>
+          {% endif %}
         </div>
        {% endblock %}
       </div>

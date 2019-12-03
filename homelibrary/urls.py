@@ -31,6 +31,7 @@ urlpatterns = [
     path('books/', views.books),
     path('authors/', views.authors),
     path('renters/', views.books_rent),
+    path('profile/', views.profile,  name='profile'),
     path('login/', login, name='login'),  
     path('logout/', logout, name='logout'),
     url(r'^accounts/', include('allauth.urls')),  
